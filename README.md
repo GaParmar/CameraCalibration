@@ -6,6 +6,9 @@ Camera calibration with open cv python
 2. move all images of the grid in a folder <PATH>
 3. python main.py --images_path <PATH>
 
+## Collect images
+- python collect_images.py --seq_name <label-for-this-camera>
+
 # Results
 ![corners](grid.png)
 

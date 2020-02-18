@@ -21,8 +21,13 @@ def write_to_file(params, fname):
 def undistort(img, mtx, dist):
     h,w = img.shape[:2]
     newcameramtx, roi = cv.getOptimalNewCameraMatrix(mtx, dist, (w,h), 1, (w,h))
-    dst = cv.undistort(img, mtx, dist, None, newcameramtx)
+    # dst = cv.undistort(img, mtx, dist, None, newcameramtx)
+
+    mapx,mapy = cv.initUndistortRectifyMap(mtx,dist,None,newcameramtx,(w,h),5)
+    dst = cv.remap(img,mapx,mapy,cv.INTER_LINEAR)
+
     x,y,w,h = roi
     # dst = dst[y:y+h, x:x+h]
+    # resized = cv.resize(dst, (img.shape[:2][::-1]))
     return dst
     
